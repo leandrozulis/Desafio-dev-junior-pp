@@ -21,7 +21,7 @@ export class User {
     props: Replace<
       UserSchema, {
         dtcreated?: Date,
-        dtupdated: Date | undefined
+        dtupdated?: Date | undefined
       }>,
     id?: string) {
     this._id = id ?? randomUUID();
