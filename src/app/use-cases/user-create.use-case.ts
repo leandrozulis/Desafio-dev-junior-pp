@@ -3,8 +3,7 @@ import { User } from "../entities/User";
 import { RepositoryUser } from "../repositories/user.repository";
 import { validateUniqueCpfCnpj } from "../validators/validate-unique-cpfCnpj";
 import { validateUniqueEmail } from "../validators/validate-unique-email";
-import { AlreadyExistsError } from "./Errors/AlreadyExists.error";
-import { AtributesTypeError } from "./Errors/utils/atributes-type.error";
+import bcrypt from "bcrypt";
 
 interface UserSchemaRequest {
   role: RoleType;
@@ -32,7 +31,7 @@ export class UseCaseUserCreate {
       fullName,
       cpfCnpj,
       email,
-      password,
+      password: await bcrypt.hash(password, 6),
       balance
     });
 
