@@ -5,7 +5,7 @@ export interface RepositoryUser {
   findByEmail(email: string): Promise<User | null>;
   findByCpfCnpj(cpfCnpj: string): Promise<User | null>;
   register(user: User): Promise<void>;
-  update(user: User): Promise<void>;
+  update(id: string, user: User): Promise<void>;
   remove(id: string): Promise<void>;
   getAll(): Promise<User[]>;
 }
