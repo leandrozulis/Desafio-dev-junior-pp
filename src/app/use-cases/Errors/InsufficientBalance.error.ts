@@ -1,5 +1,5 @@
 export class InsufficientBalanceError extends Error {
     constructor(balance: number) {
-        super(`The amount of R$${balance} is insufficient for transfer`)
+        super(`Insufficient balance of R$${balance} to make the transfer`)
     }
 }
