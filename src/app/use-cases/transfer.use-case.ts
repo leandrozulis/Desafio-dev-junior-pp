@@ -10,6 +10,7 @@ interface useCaseTransferRequest {
     userId: string;
     repeaterUserId: string;
     value: number;
+    type: TransferType;
 }
 
 interface useCaseTransferResponse {
@@ -20,9 +21,9 @@ export class UseCaseTransfer {
     constructor(
         private repositoryTransfer: RepositoryTransfer,
         private repositoryUser: RepositoryUser
-    ) {}
+    ) { }
 
-    async execute({ userId, repeaterUserId, value }: useCaseTransferRequest): Promise<useCaseTransferResponse> {
+    async execute({ userId, repeaterUserId, value, type }: useCaseTransferRequest): Promise<useCaseTransferResponse> {
 
         const user = await validateUserExists(userId, this.repositoryUser)
 
@@ -36,7 +37,7 @@ export class UseCaseTransfer {
         await this.repositoryUser.update(user.id, result.user)
         await this.repositoryUser.update(userRepeater.id, result.repeaterUser)
 
-        const transfer = await this.repositoryTransfer.register(userId, repeaterUserId, value)
+        const transfer = await this.repositoryTransfer.register(userId, repeaterUserId, value, type)
 
         return { transfer }
     }
